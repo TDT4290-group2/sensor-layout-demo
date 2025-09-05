@@ -1,7 +1,8 @@
+import { NavTabs } from "@/components/nav-tabs";
 import type { Metadata } from "next";
+import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { NavTabs } from "@/components/nav-tabs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,23 +25,30 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header>
-          <nav className="flex items-center">
-            <NavTabs
-              routes={[
-                { name: "Overview", path: "/" },
-                { name: "Noise", path: "/noise" },
-                { name: "Dust", path: "/dust" },
-                { name: "Vibration", path: "/vibration" },
-              ]}
-            />
-          </nav>
-        </header>
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <header>
+            <nav className="flex items-center m-2">
+              <NavTabs
+                routes={[
+                  { name: "Overview", path: "/" },
+                  { name: "Noise", path: "/noise" },
+                  { name: "Dust", path: "/dust" },
+                  { name: "Vibration", path: "/vibration" },
+                ]}
+              />
+            </nav>
+          </header>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
