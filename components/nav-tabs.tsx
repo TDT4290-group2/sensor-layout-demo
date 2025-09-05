@@ -24,7 +24,7 @@ export function NavTabs({
         className="absolute top-0 bottom-0 z-10 flex overflow-hidden rounded-full py-1.5 transition-all duration-300"
         style={{ left: pillLeft, width: pillWidth }}
       >
-        <span className="h-full w-full rounded-full bg-vektor-blue shadow-sm" />
+        <span className="h-full w-full rounded-full bg-slate-300 shadow-sm" />
       </span>
       {routes.map((route, i) => {
         return (
