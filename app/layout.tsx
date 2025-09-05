@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { NavTabs } from "@/components/nav-tabs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +28,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <header>
+          <nav className="flex items-center">
+            <NavTabs
+              routes={[
+                { name: "Overview", path: "/" },
+                { name: "Noise", path: "/noise" },
+                { name: "Dust", path: "/dust" },
+                { name: "Vibration", path: "/vibration" },
+              ]}
+            />
+          </nav>
+        </header>
         {children}
       </body>
     </html>
