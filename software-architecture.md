@@ -84,3 +84,30 @@ title System Context of Vektorprogrammet
 
     UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
 ```
+
+## HealthTech Component Context
+
+```mermaid
+  C4Component
+  title User/Worker Dashboard Application
+  UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
+
+  Container(web, "Web App", "React SPA", "Personalized overview of exposure risks and warnings")
+
+  Container(mobile, "Mobile App", "React Native", "Personalized overview of exposure risks and warnings")
+
+  Rel(web, api, "Subscribes to", "http/json")
+  Rel(mobile, api, "Subscribes to", "http/json")
+
+  Component(api, "RPC API", "nodejs/nextjs/jvm/whatever", "Safely exposes sync engine endpoints")
+
+  Rel(api, sync, "Exposes", "http/json")
+
+  Container_Boundary(backend, "Backend") {
+    Component(sync,"Sync Engine", "electricsql/timescaledb", "Exposes")
+
+    Rel(sync, db, "Wraps", "http/json")
+
+    ContainerDb(db, "HealthTech DB", "postgresql", "Stores user specific data and time series sensor data")
+  }
+```
